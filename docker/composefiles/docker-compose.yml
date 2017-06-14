@@ -1,0 +1,19 @@
+version: '2'
+services:
+  versed:
+    image: versed/main-app
+    #volumes:
+    #  - /Users/Eric/Documents/versed:/opt/versed/current
+    environment:
+      - BRANCH=master
+    ports:
+      - 3000:3000
+    stdin_open: true
+  postgres:
+    image: postgres
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_PASSWORD=versed
+    volumes:
+      - ./base-postgres.sql:/docker-entrypoint-initdb.d/base-postgres.sql:ro
